@@ -1,0 +1,99 @@
+import random
+
+def escolher_palavra():
+    palavras = ['rosa', 'vermelho', 'azul', 'verde']
+    return random.choice(palavras)
+
+def desenhar_forca(tentativas):
+    if tentativas == 6:
+        print("  _______ ")
+        print(" |       |")
+        print(" |")
+        print(" |")
+        print(" |")
+        print(" |")
+        print("_|_")
+    elif tentativas == 5:
+        print("  _______ ")
+        print(" |       |")
+        print(" |       O")
+        print(" |")
+        print(" |")
+        print(" |")
+        print("_|_")
+    elif tentativas == 4:
+        print("  _______ ")
+        print(" |       |")
+        print(" |       O")
+        print(" |       |")
+        print(" |")
+        print(" |")
+        print("_|_")
+    elif tentativas == 3:
+        print("  _______ ")
+        print(" |       |")
+        print(" |       O")
+        print(" |      /|")
+        print(" |")
+        print(" |")
+        print("_|_")
+    elif tentativas == 2:
+        print("  _______ ")
+        print(" |       |")
+        print(" |       O")
+        print(" |      /|\\")
+        print(" |")
+        print(" |")
+        print("_|_")
+    elif tentativas == 1:
+        print("  _______ ")
+        print(" |       |")
+        print(" |       O")
+        print(" |      /|\\")
+        print(" |      /")
+        print(" |")
+        print("_|_")
+    elif tentativas == 0:
+        print("  _______ ")
+        print(" |       |")
+        print(" |       O")
+        print(" |      /|\\")
+        print(" |      / \\")
+        print(" |")
+        print("_|_")
+
+def jogar_forca():
+    palavra = escolher_palavra()
+    palavra_secreta = list("_" * len(palavra))
+    tentativas = 6
+    letra_errada = []
+
+    while tentativas > 0 and "_" in palavra_secreta:
+        desenhar_forca(tentativas)
+
+        print("Palavra secreta:", " ".join(palavra_secreta))
+        print("Letras erradas:", " ".join(letra_errada))
+        print()
+
+        letra = input("Digite uma letra: ").lower()
+
+        if letra in palavra:
+            for x in range(len(palavra)):
+                if palavra[x] == letra:
+                    palavra_secreta[x] = letra
+                    
+        else: 
+            tentativas -= 1
+            letra_errada.append(letra)
+            print(f"Letra incorreta! Tentativas restantes: {tentativas}")
+            print()
+            
+    desenhar_forca(tentativas)
+    print("Palavra secreta:", " ".join(palavra_secreta))
+
+    if "_" not in palavra_secreta:
+        print("Parabéns! Você venceu!")
+    else:
+        print(f"Game Over! A palavra era {palavra}")
+        
+jogar_forca()
